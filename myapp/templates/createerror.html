@@ -1,0 +1,53 @@
+{% extends "listitem.html" %}
+
+
+
+
+
+
+{% block error %}
+
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+        <a href="/"><button type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </a>
+      </div>
+      <div class="modal-body">
+
+          <p style="text-align:center;"> The form could not be submitted.
+            Check all fields to make sure you have entered them correctly<br></p>
+
+
+
+      <div class="modal-footer">
+        <a href="/createditem"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
+
+
+
+
+      </div>
+  </div>
+
+
+</div>
+</div>
+</div>
+
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function(){
+        console.log("window is loaded")
+        $("#exampleModal").modal("show")
+    })
+</script>
+{% endblock %}
+
+
+
+</html>

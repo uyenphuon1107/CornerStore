@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<p>
+    <ul>
+    {% for i in items %}
+    <li> {{ i.name }}</li>
+    {% endfor %}
+</ul>
+
+
+</head>
+<body>
+
+
+
+<div class="container-fluid" style="width:80%">
+  <div class="row content">
+
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2> {{ item.name }} </h2>
+    </div>
+    <br>
+
+    <div class="col-sm-9">
+
+      <div class='custom-picture'>
+      <h4><img src='/static/listing_pics/{{item.image_file}}' style="width:50%; height:50%"></h4>
+      </div>
+
+
+    <br>
+      <div class="row">
+      <div class="col-sm-9">
+
+        <h4>Volunteer Opportunity Description</h4>
+        <p> {{item.description }}</p>
+      </div>
+  </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">
+
+            <h4></h4>
+
+        </div>
+        <div class="col-sm-3">
+
+            <h4></h4>
+
+
+        </div>
+        <div class="col-sm-3">
+
+            <h4>Location</h4>
+            <p>{{ item.location }}</p>
+
+        </div>
+        <div class="col-sm-3">
+
+            <h4> Date:</h4>
+            {{ item.date }}
+
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+            <p>Text</p>
+            <p>Text</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+            <p>Text</p>
+            <p>Text</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+            <p>Text</p>
+            <p>Text</p>
+          </div>
+        </div>
+      </div> -->
+      <br><br><br>
+      <div class="row" style="align-text: right;">
+        <div class="col-sm-6" >
+
+
+        </div>
+        <div class="col-sm-6" style="text-align: right;">
+
+
+
+            <a href="/bevolunteer/{{item.id}}" class="btn btn-primary btn-lg">
+          <span class="glyphicon glyphicon glyphicon-tree-conifer"></span> Sign Up
+        </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% block text %}
+{% endblock %}
+{% block script %}
+{% endblock %}
+
+</body>
+</html>
+
+
+
+{% endblock %}

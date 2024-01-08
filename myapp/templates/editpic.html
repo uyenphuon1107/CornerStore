@@ -1,0 +1,48 @@
+{% extends "profile.html" %}
+
+{% block text %}
+
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change your Profile Picture</h5>
+
+
+      </div>
+      <div class="modal-body">
+
+          <form action="" method="POST" enctype="multipart/form-data">
+            {{form.hidden_tag()}}
+          <div class="col-md-12">{{ form.picture.label }} <br>
+              {{ form.picture(class="form-control") }}</div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <div class="mt-5 text-center">
+          {{ form.submit(class="btn btn-primary") }}</div>
+          </div>
+          </form>
+        </div>
+
+
+
+  </div>
+
+
+</div>
+
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function(){
+        console.log("window is loaded")
+        $("#exampleModal").modal("show")
+    })
+</script>
+{% endblock %}
+
+</body>
+
+</html>

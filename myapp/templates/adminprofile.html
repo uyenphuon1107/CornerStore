@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<br><br>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <br> <center><strong><span class="font-weight-bold"> {{ username }}</span></strong>
+                   <p> {{ admin }}</p>
+
+
+            </div>
+        </div>
+        <div class="col-md-8 border-right">
+            <div class="p-3 py-5">
+
+                <div class="row mt-2">
+                    <h4 style='font-family: Monaco;'>Fraud Reports</h4>
+                    {% if count > 0 %}
+                {% for i in fraud %}
+
+
+                  <a href="/viewprofile/{{i.user_id}}">  <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <div class="col">{{ i.username }}</div>
+                    </div>
+
+                      <div class="panel-body">
+                        {{ i.reason }} </div>
+
+
+
+                        <div class='panel-footer' style='text-align:right'>
+
+                          <span ><a href="/report/deleteuser/{{i.user_id}}/{{i.id}}"><button type="button" class="btn btn-primary">Remove User</button></a></span>
+                          <span><a href="/report/deletereport/{{i.id }}"><button type="button" class="btn btn-secondary">No Fraud</button></a></span>
+
+                        </div>
+                        </a>
+                        {% endfor %}
+
+                        {% else %}
+                        <div class='well'>
+                          None
+                          </div>
+                        </div>
+                          {% endif %}
+
+</div>
+
+<div class="row mt-2">
+    <h4 style='font-family: Monaco;'>Agency Approvals</h4>
+{% if count2 > 0 %}
+{% for i in apps %}
+
+
+   <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="col">{{ i.name }}</div>
+    </div>
+
+      <div class="panel-body">
+        {{ i.email }} <br>
+        {{ i.phone }} <br>
+        {{ i.account }} <br>
+        {{ i.date }}</div>
+
+
+
+        <div class='panel-footer' style='text-align:right'>
+
+          <span ><a href="/deny/{{i.id}}"><button type="button" class="btn btn-primary">Deny</button></a></span>
+          <span><a href="/approve/{{i.user_id}}/{{i.id}}"><button type="button" class="btn btn-secondary">Approve</button></a></span>
+
+        </div>
+
+        </div>
+        {% endfor %}
+
+        {% else %}
+        <div class='well'>
+          None
+          </div>
+        </div>
+          {% endif %}
+</div>
+</div>
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+{% endblock %}

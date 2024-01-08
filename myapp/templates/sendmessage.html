@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  {% for field, errors in form.errors.items() %}
+
+          <div class="alert alert-danger alert-dismissible" role="alert">
+              {{ ', '.join(errors) }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="text-align:right" >
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          {% endfor %}
+</br>
+    <h4> Send Message</h4>
+</br>
+
+<div class = 'shadow p-3 mb-5 bg-body rounded'>
+<form action="" method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.sent_id.label }} <br>
+        {{ form.sent_id(size=20) }}
+    </p></br>
+    <p>
+        {{ form.content.label }} <br>
+        {{ form.content(size=70) }}
+    </p></br>
+
+    <p>
+        {{ form.submit() }}
+    </p>
+
+</form>
+    {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
+</div>
+</div>
+{% endblock %}

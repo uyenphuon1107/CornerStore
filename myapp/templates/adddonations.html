@@ -1,0 +1,155 @@
+{% extends "agencyprofile.html" %}
+
+
+    {% block text %}
+
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sign Up for Corner Store</h5>
+            <a href="/"><button type="button" class="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </a>
+          </div>
+          <div class="modal-body">
+            {% for field, errors in form.errors.items() %}
+
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        {{ ', '.join(errors) }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="text-align:right" >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+            <form method="POST" >
+                {{ form.hidden_tag() }}
+
+                <fieldset>
+
+              <p style="text-align:left;"><strong> Name: {{ user.username }} </p><br>
+
+              <p style="text-align:left;"> Email: {{user.email }} </p><br></strong>
+
+
+                <p style="text-align:left;"> {{ form.phone.label }} <br>
+                  <input type="text" id='phone' placeholder="Enter Phone Number" style='width: 100%;
+                  padding: 12px 20px;
+                  margin: 8px 0;
+                  display: inline-block;
+                  border: 1px solid #ccc;
+                  border-radius: 10px;
+                  box-sizing: border-box;')</p>
+
+
+
+
+                  <p style="text-align:left;"> {{ form.account.label }} <br>
+                    {{ form.account(placeholder="Enter Account Number", style='width: 100%;
+                    padding: 12px 20px;
+                    margin: 8px 0;
+                    display: inline-block;
+                    border: 1px solid #ccc;
+                    border-radius: 10px;
+                    box-sizing: border-box;') }} </p>
+
+                    <p>
+
+                    {{ form.date.label }} <br>
+                    <input id="date" class="form-control" type="date" name="date"/>
+                    <span id="startDateSelected"></span>
+
+                       </p>
+                       <br>
+                       <br>
+
+
+          <div class="modal-footer">
+            <label>
+              <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> I have read and agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a> for donations.
+            </label>
+            <br>
+            <a href="/agencyprofile"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></a>
+
+            {{ form.submit(class="btn btn-primary") }}
+
+            </fieldset>
+          </div>
+
+    </form>
+      </div>
+
+
+    </div>
+    </div>
+
+
+    {% endblock %}
+
+    {% block scripter %}
+
+
+    <script>
+        $(document).ready(function(){
+            console.log("window is loaded")
+            $("#exampleModal").modal("show")
+        });
+        let date = document.getElementById('date')
+
+
+        date.addEventListener('change',(e)=>{
+          let startDateVal = e.target.value
+          document.getElementById('startDateSelected').innerText = startDateVal
+        })
+</script>
+    <script src="/static/jquery-input-mask-phone-number.js"></script>
+<script>
+        $(document).ready(function () {
+    $('#phone').usPhoneFormat({
+        format: '(xxx) xxx-xxxx',
+    });
+});
+
+
+    </script>
+    {% endblock %}
+    <!-- <center > <h1 style = "font-family: monaco; "> Add Donations</h1> </center>
+
+    <div class="container" style="background-color:#ffff;" >
+
+
+      <p style="text-align:left;"> {{ form.name.label }} <br>
+        {{ form.name(placeholder="Enter New Name", style='width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-sizing: border-box;') }} </p>
+
+      <label for="phone"><b>Contact Number</b></label>
+      <input type="text" placeholder="Phone Number " name="phone" required>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Email " name="email" required>
+
+      <label for="acount"><b>Account Number</b></label>
+      <input type="text" placeholder="Enter account number" name="acount" required>
+
+      <label for="date"><b>Issue Date</b></label>
+      <input type="text" placeholder="mm/yyyy" name="date" required>
+      <br><br>
+
+      <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> I have read and agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a> for donations.
+      </label>
+
+
+      <div class="clearfix">
+        <button type="button"
+        onclick="document.getElementById('id01').style.display='none'" class="cancelbtn" >Cancel</button>
+        <button type="submit" class="signupbtn" >Submit</button>
+      </div>
+    </div>
+  </form> -->

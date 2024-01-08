@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <style>
+        /* Remove the navbar's default rounded borders and increase the bottom margin */
+        /*.navbar {*/
+        /*    margin-bottom: 50px;*/
+        /*    border-radius: 0;*/
+        /*}*/
+
+        /* Remove the jumbotron's default bottom margin */
+        .jumbotron {
+            margin-bottom: 0;
+            font-family: "Monaco", "Courier New", monospace;
+            background-color: white;
+            padding: 10px;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        /*footer {*/
+        /*    background-color: #f2f2f2;*/
+        /*    padding: 25px;*/
+        /*}*/
+        .h1 {
+            font-family: "Monaco", "Courier New", monospace;
+        }
+        button {
+
+            background-color: #5fa70d;
+
+            width: 100%;
+            color: black;
+            padding: 15px;
+            margin: 10px 0px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.7;
+        }
+    </style>
+
+{% block content %}
+<style>
+        button {
+            background-color: #5fa70d;
+            width: 100%;
+            color: black;
+            padding: 15px;
+            margin: 10px 0px;
+            border: none;
+            cursor: pointer;
+        }
+
+        form {
+            border: 0px;
+        }
+        input[type=text], input[type=password] {
+            width: 100%;
+            margin: 8px 0;
+            padding: 12px 20px;
+            display: inline-block;
+            border: 2px solid #F8E9C8;
+            box-sizing: border-box;
+        }
+        button:hover {
+            opacity: 0.7;
+        }
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            margin: 10px 5px;
+        }
+
+        .container {
+            padding: 25px;
+            background-color: white;
+        }
+        .containerx {
+            width: 100%;
+            margin: 1px;
+            padding: 10px;
+            background-color: #F5FFEB;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+        .centerx {
+            margin: auto;
+            width: 50%;
+            padding: 0px;
+            background-color: white;
+    }
+</style>
+<body>
+<br>
+{% for item in a %}
+<p> {{ item }}</p>
+{% endfor %}
+{% for field, errors in form.errors.items() %}
+
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ ', '.join(errors) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="text-align:right" >
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endfor %}
+<center> <h1 style = "font-family: monaco;"> List Volunteer Opportunity</h1> </center>
+<br><br>
+
+<div class = "centerx">
+<div class="containerx">
+
+
+    <form method="POST" action = "/listvolunteer" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+<!--           <div class="form-group">
+            <div class="containerx"> -->
+            <fieldset>
+
+              <p style="text-align:left;"> {{ form.picture.label }} <br>
+          {{ form.picture(placeholder="Enter Item Photo", style='width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          box-sizing: border-box;')}}
+          {%if form.picture.errors%}
+              {%for error in form.picture.errors %}
+                  <span class="text-danger">{{error}}</span> <br>
+              {%endfor%}
+          {%endif%}
+      </p>
+
+          <p style="text-align:left;"> {{ form.name.label }} <br>
+            {{ form.name(placeholder="Enter Volunteer Opportunity", style='width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;') }} </p>
+
+            <p>
+
+            {{ form.date.label }} <br>
+            <input id="date" class="form-control" type="date" name="date"/>
+            <span id="startDateSelected"></span>
+
+               </p>
+
+          <p style="text-align:left;"> {{ form.description.label }} <br>
+            {{ form.description(placeholder="Enter opportunity description", style='width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;') }} </p>
+
+          <p style="text-align:left;"> {{ form.location.label }} <br>
+            {{ form.location(placeholder="Enter opportunity location", style='width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;') }} </p>
+
+
+
+        <p style="padding-right:10px">{{ form.submit(class= "btn btn-primary",style="float:right; padding:10px")}}</p>
+
+
+        </fieldset>
+      </div>
+    <!-- <form action="/action_page.php">
+        <div class="form-check mb-3">
+            <label class="form-label" for="customFile">Select Images</label>
+            <input type="file" class="form-control" id="customFile" />
+            </label>
+        </div>
+        <div class="mb-3">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
+        </div>
+        <div class="mb-3">
+            <label for="pri">Price:</label>
+            <input type="text" class="form-control" id="pri" placeholder="Enter price" name="price">
+        </div>
+        <div class="mb-3">
+            <label for="desc">Description:</label>
+            <input type="text" class="form-control" id="desc" placeholder="Enter description" name="description">
+        </div>
+        <div class="form-check mb-3">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="remember"> Accept offers
+            </label>
+        </div>
+        <div class="form-check mb-3">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="warehouse"> Premium Warehouse
+            </label>
+        </div>
+
+        <button type ="submit" class="button"> List Item </button> -->
+
+    </form>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript">
+let date = document.getElementById('date')
+
+
+date.addEventListener('change',(e)=>{
+  let startDateVal = e.target.value
+  document.getElementById('startDateSelected').innerText = startDateVal
+})
+
+
+  </script>
+{% endblock %}
+</body>
+</html>

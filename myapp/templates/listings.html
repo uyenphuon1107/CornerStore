@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+
+{% block content %}
+<br><br>
+<h1 style="text-align: center; font: monospace; font-family: Monaco"> {{ title }} </h1>
+<div class = "container">
+<div class = "center">
+  {% for item in a %}
+  <p> {{ item }}</p>
+  {% endfor %}
+  {% for field, errors in form.errors.items() %}
+  {% endfor %}
+
+    <!-- Actual search box -->
+    <div class="form-group has-feedback has-search">
+      <form method="POST">
+        <span id = 'submit' name = 'submit' class="glyphicon glyphicon-search form-control-feedback"></span>
+        <input id = 'search' type="text" class="form-control" name = 'search' placeholder="Search for Items">
+      </form>
+    </div>
+</div>
+</div>
+<br><br>
+
+
+<div class="container">
+<div class="row">
+  {% if count > 0 %}
+    {% for i in sale %}
+        <div class="col-sm-4">
+          {% if i.status == "For Sale" %}
+            {% if i.free %}
+            <a href="/freelistings/{{i.id}}">
+            <div class="panel panel-info">
+
+                <div class="panel-heading">{{ i.name }}<span style="float:right;">Free</span></div>
+                <div class="panel-body" style="height:350px;"><img src="/static/listing_pics/{{i.image_file}}" class="img-responsive" style="width:100%; " alt="Image"></div>
+                <div class="panel-footer" style="height:50px">{{ i.description }}</div>
+            {% elif i.trade %}
+            <a href="/tradelistings/{{i.id}}">
+            <div class="panel panel-warning">
+
+                <div class="panel-heading">{{ i.name }}<span style="float:right;">Trade</span></div>
+                <div class="panel-body" style="height:350px; vertical-align:middle;"><img src="/static/listing_pics/{{i.image_file}}" class="img-responsive" style="width:100%; vertical-align:middle; " alt="Image"></div>
+                <div class="panel-footer" style="height:50px">{{ i.description }}</div>
+            {% else %}
+            <a href="/listings/{{i.id}}">
+            <div class="panel panel-success">
+
+                <div class="panel-heading">{{ i.name }}<span style="float:right;">{{ i.price }}</span></div>
+                <div class="panel-body" style="height:350px; vertical-align:middle;"><img src="/static/listing_pics/{{i.image_file}}" class="img-responsive" style="width:100%; vertical-align:middle; " alt="Image"></div>
+                <div class="panel-footer" style="height:50px">{{ i.description }}</div>
+
+                {% endif %}
+                {% endif %}
+            </div>
+        </a>
+        </div>
+        {% endfor %}
+        {% elif count == 0 and good == True %}
+        <h1>No items matched your search</h1>
+        {% else %}
+        <h1>There are no items at this time</h1>
+        {% endif %}
+
+</div><br><br>
+
+</body>
+{% block modal %}
+{% endblock %}
+{% block scripter %}
+{% endblock %}
+
+{% endblock %}
+</html>

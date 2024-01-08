@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <style>
+        /* Remove the navbar's default rounded borders and increase the bottom margin */
+        /*.navbar {*/
+        /*    margin-bottom: 50px;*/
+        /*    border-radius: 0;*/
+        /*}*/
+
+        /* Remove the jumbotron's default bottom margin */
+        .jumbotron {
+            margin-bottom: 0;
+            font-family: "Monaco", "Courier New", monospace;
+            background-color: white;
+            padding: 10px;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        /*footer {*/
+        /*    background-color: #f2f2f2;*/
+        /*    padding: 25px;*/
+        /*}*/
+        .h1 {
+            font-family: "Monaco", "Courier New", monospace;
+        }
+        button {
+
+            background-color: #5fa70d;
+
+            width: 100%;
+            color: black;
+            padding: 15px;
+            margin: 10px 0px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.7;
+        }
+    </style>
+
+
+<body>
+
+{% block content %}
+
+<br><br>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <br> <center><strong><span class="font-weight-bold"> {{ username }}</span></strong>
+                <br>
+                {% if user.verified == "True" %}
+                <span> Verified Status: Verified</span> <br><br>
+                <span><a href="/editprofile"> <button type="button" class="btn btn-primary">Edit Profile</button> </a></span><br><br>
+                <span><a href="/listvolunteer"><button type="button" class="btn btn-primary"> Add Volunteer Opportunity </button></a></span>
+                <br>
+                {% else %}
+                <span> Verified Status: No</span> <br><br>
+                <span><a href="/editprofile"> <button type="button" class="btn btn-primary">Edit Profile</button> </a></span><br><br>
+                <span><a href="/adddonations"><button type="button" class="btn btn-primary"> Apply for Verification </button></a></span>
+                <br><br>
+                <p> With verification you can receive donations from CornerStore buyers and list volunteer opportunities in your area!</p>
+                {% endif %}
+
+            </center>
+            </div>
+        </div>
+        <div class="col-md-8 border-right">
+            <div class="p-3 py-5">
+                <h4 style='font-family: Monaco;'>Your Listings</h4>
+                <div class="row mt-2">
+
+                    {% for i in listings %}
+
+                        <a href="/managevol/{{i.id}}">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <div class="col">{{ i.name }}</div>
+                        </div>
+                        <div class="panel-heading">
+                                <div class='col', style="text-align:right">
+
+
+                        </div>
+                    </div>
+                          <div class="panel-body">
+                            {{ i.description }} </div>
+
+                        </div>
+                    </a>
+
+
+                   {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+</div>
+
+
+</main>
+{% block text %}
+{% endblock %}
+{% block scripter %}
+{% endblock %}
+{% endblock %}
+</body>
+</html>

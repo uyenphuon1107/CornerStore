@@ -1,0 +1,171 @@
+
+{% extends "base.html" %}
+<html>
+<!-- <style>
+	    img{
+	        max-width: 100%;
+	        max-height: 100%;
+	        display: block; /* remove extra space below image */
+	    }
+	    .box{
+	        width: 250px;
+	        border: 5px solid black;
+	    }
+	    .box.large{
+	        height: 300px;
+	    }
+	    .box.small{
+	        height: 100px;
+	    }
+	</style> -->
+
+{% block content %}
+<p>
+
+
+
+
+<body>
+
+
+
+<div class="container-fluid" style="width:80%">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2> {{ item.name }} </h2>
+      <br><br><br><br><br><br><br><br>
+
+			<a href="/viewprofile/{{item.user_id}}">
+        <div style="padding-left:50px;">
+        <img class="rounded-circle mt-1" style="border-radius:50%;" width="80px" src="/static/profile_pics/{{ user.image_file}}"><br>
+</div>
+    <button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon glyphicon-user"></span> View {{user.username}}'s Profile
+	</a>
+
+    </div>
+
+    <br>
+
+
+    <div class="col-sm-9">
+			<div class='custom-picture'>
+			<img src="/static/listing_pics/{{item.image_file}}" style="width:50%; height:50%" >
+
+			</div>
+
+
+
+    <!-- <div class = "container w-50">
+      <form method="POST" action="" enctype="multipart/form-data"> </form>
+    </div> -->
+
+        <!-- <p><br><br><br><br><br><br><br><br></p> -->
+
+      <br>
+
+      <div class="row">
+      <div class="col-sm-9">
+
+      	<h4>Item Description</h4>
+    	<p> {{item.description }}</p>
+      </div>
+  </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">
+
+            <h4> Donation item? </h4>
+            {% if item.agency %}
+            <p>No</p>
+						{% else %}
+						<p>Yes</p>
+            {% endif %}
+
+        </div>
+        <div class="col-sm-3">
+
+            <h4>Warehouse? </h4>
+            {% if item.warehouse %}
+            <p>Yes</p>
+            {% else %}
+            <p> No </p>
+            {% endif %}
+
+        </div>
+        <div class="col-sm-3">
+
+            <h4>Location</h4>
+            <p>{{ item.location }}</p>
+
+        </div>
+        <div class="col-sm-3">
+
+          	<h4>Price</h4>
+          	{% if item.free == True %}
+            <p> Free </p>
+            {% elif item.trade == True %}
+            <p> Trade </p>
+            {% else %}
+            <p> {{ item.price }}</p>
+            {% endif %}
+
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+            <p>Text</p>
+            <p>Text</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+            <p>Text</p>
+            <p>Text</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+            <p>Text</p>
+            <p>Text</p>
+          </div>
+        </div>
+      </div> -->
+      <br><br><br>
+      <div class="row" style="align-text: right;">
+        <div class="col-sm-6" >
+
+            <a href="#" class="btn btn-secondary btn-lg">
+          <span class="glyphicon glyphicon-tags"></span>  Bid on Item
+        </a>
+
+        </div>
+        <div class="col-sm-4" style="text-align: right;">
+
+
+
+            <a href="/purchase/{{item.id}}" class="btn btn-primary btn-lg">
+          <span class="glyphicon glyphicon-shopping-cart"></span> Buy Now
+        </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% block text %}
+{% endblock %}
+{% block script %}
+{% endblock %}
+
+</body>
+</html>
+
+
+
+{% endblock %}

@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <style>
+    span.stars, span.stars span {
+        display: block;
+        background: url('images/stars.png') 0 -40px repeat-x;
+        background-color: transparent;
+        width: 185px;
+        height: 40px;
+    }
+
+    span.stars span {
+        background-position: 0 0;
+    }
+
+        /* Remove the navbar's default rounded borders and increase the bottom margin */
+        /*.navbar {*/
+        /*    margin-bottom: 50px;*/
+        /*    border-radius: 0;*/
+        /*}*/
+
+        /* Remove the jumbotron's default bottom margin */
+        .jumbotron {
+            margin-bottom: 0;
+            font-family: "Monaco", "Courier New", monospace;
+            background-color: white;
+            padding: 10px;
+        }
+
+
+        /* Box styles */
+      .plzwork {
+      border: none;
+      padding: 5px;
+      font: 24px/36px sans-serif;
+      width: 200px;
+      height: 200px;
+      overflow: scroll;
+      }
+
+      /* Scrollbar styles */
+      ::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+      }
+
+      ::-webkit-scrollbar-track {
+      border: 1px solid yellowgreen;
+      border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+      background: yellowgreen;
+      border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+      background: #88ba1c;
+      }
+
+
+
+        /* Add a gray background color and some padding to the footer */
+        /*footer {*/
+        /*    background-color: #f2f2f2;*/
+        /*    padding: 25px;*/
+        /*}*/
+        .h1 {
+            font-family: "Monaco", "Courier New", monospace;
+        }
+        button {
+
+            background-color: #5fa70d;
+
+            width: 100%;
+            color: black;
+            padding: 15px;
+            margin: 10px 0px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.7;
+        }
+        .edit-button {
+          border: 2px lightblue;
+
+        }
+
+}
+
+    </style>
+
+
+
+
+{% block content %}
+
+
+<br><br>
+
+<div class="container rounded bg-white mt-2 mb-2">
+    <div class="row">
+        <div class="col-md-2 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+
+                <img class="rounded-circle mt-5" width="150px" src="/static/profile_pics/{{ user.image_file}}">
+                <div class='edit-button' style='position: absolute;
+                top: 0px;
+                left: 130px;
+                font-size: 30px;
+                 color: lightblue;
+
+                 border-radius: 50%;
+                 background-color:#5fa70d'>
+                <a href='/editpic'><button type="button" class="btn btn-link"><span ><span class="glyphicon glyphicon glyphicon-pencil" style="font-size: 23px; color:white"></span></span></button></a>
+              </div>
+                <br> <center><strong><span class="font-weight-bold"> {{ username }}</span></strong>
+
+                <br><span> User Rating: <br><br></span></center>
+                {% if rating.rating %}<span class="stars">{{rating.rating}}</span>
+                {% else %}
+                <p>No Ratings</p>
+                {% endif %}
+
+<br><br>
+                <span><a href="/editprofile"> <button type="button" class="btn btn-primary">Edit Profile</button> </a></span><br><br>
+                <span><a href="/createlisting"><button type="button" class="btn btn-primary">Create Item Listing</button></a></span>
+                <br><br><span><a href="/viewmessage"><button type="button" class="btn btn-primary">View Messages</button></a></span>
+                <br><br><span><a href="/sendmessage"><button type="button" class="btn btn-primary">Send Message</button></a></span>
+            </center>
+            </div>
+        </div>
+        <div class="col-md-7 border-right">
+            <div class="p-3 py-5">
+                <h4 style='font-family: Monaco;'>Your Listings</h4>
+                <div class="row mt-2" style="padding:30px">
+                  {% if count > 0 %}
+
+                    {% for i in listings %}
+                    {% if i.status == 'For Sale' %}
+                    <div class="col-sm-6">
+
+                        <a href="/managelistings/{{i.id}}">
+                          {% if i.price > 0.0 %}
+                              <div class="panel panel-success">
+
+                                  <div class="panel-heading">{{ i.name }}<span style="float:right;">{{ i.price }}</span></div>
+                                  <div class="panel-body" style="height:300px;overflow-y: scroll;"><img src="/static/listing_pics/{{i.image_file}}" class="img-responsive" style="width:100%" alt="Image"></div>
+                                  <div class="panel-footer" style="height: 50px;overflow-y: scroll;">{{ i.description }}</div>
+
+
+                            </div>
+
+                            {% elif i.free %}
+                            <div class="panel panel-info">
+
+                                <div class="panel-heading">{{ i.name }}<span style="float:right;">Free</span></div>
+                                <div class="panel-body" style="height:300px;overflow-y: scroll;"><img src="/static/listing_pics/{{i.image_file}}" class="img-responsive" style="width:100%" alt="Image"></div>
+                                <div class="panel-footer" style="height: 50px;overflow-y: scroll;">{{ i.description }}</div>
+
+
+                          </div>
+
+                          {% else %}
+                          <div class="panel panel-warning">
+
+                              <div class="panel-heading">{{ i.name }}<span style="float:right;">Trade</span></div>
+                              <div class="panel-body" style="height:300px;overflow-y: scroll;"><img src="/static/listing_pics/{{i.image_file}}" class="img-responsive" style="width:100%" alt="Image"></div>
+                              <div class="panel-footer" style="height: 50px;overflow-y: scroll;">{{ i.description }}</div>
+
+
+                        </div>
+
+                        {% endif %}
+                      </div>
+                        </a>
+                        {% endif %}
+
+                        {% endfor %}
+
+                      </div>
+
+
+                    {% else %}
+
+                    <div class='well'>
+                    <p> None </p>
+                  </div>
+                </div>
+                    {% endif %}
+                  </div>
+
+
+                    <h4 style='font-family: Monaco;'>Sold</h4>
+                    <div class="row mt-2" style="padding:30px">
+                    {% if sold > 0 %}
+                    {% for i in listings %}
+                        {% if i.status == 'Sold' %}
+                        <a href="/managelistings/{{i.id}}">
+
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            {{i.name }}
+
+                        <span style="float:right;">
+
+                            {% if i.price==0.00 %}
+                                Free
+                            {% else %}
+                                {{i.price }}
+                            {% endif %}
+                            </span>
+                          </div>
+
+
+                          <div class="panel-body">
+                            {{ i.description }} </div>
+
+                        </div>
+                    </a>
+                        {% endif %}
+
+                    {% endfor %}
+                    {% else %}
+                    <div class='well'>
+                    <p> None </p>
+                  </div>
+                    {% endif %}
+                </div>
+
+        </div>
+
+
+
+
+<div class="col-md-3 border-left" style="padding-left:40px">
+
+  <h4 style='font-family: Monaco;'>Your Reviews</h4>
+
+
+
+<!-- HTML -->
+<div class="plzwork" style="overflow-y:auto; height:500px">
+  {% for x in a %}
+  <div class="p-3 py-5">
+    <div class="panel panel-primary">
+      <div class="panel-heading" style="background-color:#5fa70d">{{ x.name }}</div>
+      <div class="panel-body">{{x.review}}</div>
+      <div class="panel-footer" style="text-align:right; backgroud-color:white;">Rating: {{ x.rating }}</div>
+
+</div>
+</div>
+{% endfor %}
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+{% block text %}
+{% endblock %}
+{% block script %}
+{% endblock %}
+</main>
+<script>
+$(function() {
+    $('span.stars').stars();
+});
+$.fn.stars = function() {
+    return $(this).each(function() {
+        // Get the value
+        var val = parseFloat($(this).html());
+        // Make sure that the value is in 0 - 5 range, multiply to get width
+        var size = Math.max(0, (Math.min(5, val))) * 35;
+        // Create stars holder
+        var $span = $('<span />').width(size).height(35);
+        // Replace the numerical value with stars
+        $(this).html($span);
+    });
+}
+</script>
+
+
+
+{% endblock %}
+</body>
+</html>

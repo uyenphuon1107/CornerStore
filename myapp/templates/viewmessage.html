@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<br><br>
+<div class="container rounded bg-white mt-2 mb-2">
+    <div class="row">
+
+        <div class="col-md-2 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+
+                <img class="rounded-circle mt-5" width="150px" src="/static/profile_pics/{{ current_user.image_file}}">
+                <div class='edit-button' style='position: absolute;
+                top: 0px;
+                left: 130px;
+                font-size: 30px;
+                 color: lightblue;
+
+                 border-radius: 50%;
+                 background-color:#5fa70d'>
+                <a href='/editpic'><button type="button" class="btn btn-link"><span ><span class="glyphicon glyphicon glyphicon-pencil" style="font-size: 23px; color:white"></span></span></button></a>
+              </div>
+                <br> <center><strong><span class="font-weight-bold"> {{ username }}</span></strong>
+
+
+
+            </div>
+        </div>
+        <div class="col-md-9 border-right">
+    <h4>Unread Messages</h4>
+        {% for unread in unreads %}
+            <div class="panel panel-primary">
+            <div class="panel-heading" style="background-color:#5fa70d">From: {{ unread.user_id }}</div>
+            </div>
+        {% endfor %}
+    </br>
+    <h4>Enter Username for Message History</h4>
+</br>
+    <form action="" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.search.label }} <br>
+            {{ form.search(size=70) }}
+        </p><br/>
+
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+</br>
+
+</br>
+    <h4>Message History</h4>
+</br>
+
+
+
+{% for x in messages %}
+<div class="p-3 py-5">
+  {% if x.sent_id == current_user.username %}
+  <div class="panel panel-primary">
+    <div class="panel-heading" style="background-color:#5fa70d">From: {{ x.user_id }}</div>
+    <div class="panel-body">{{x.content}}</div>
+    <div class="panel-footer" style="text-align:right; backgroud-color:white;">
+      <a href="/messagethis/{{x.user}}">Reply</a></div>
+
+</div>
+{% elif x.user_id == current_user.username %}
+<div class="panel panel-primary">
+  <div class="panel-heading">Sent to: {{ x.sent_id }}</div>
+  <div class="panel-body">{{x.content}}</div>
+  <div class="panel-footer" style="text-align:right; backgroud-color:white;">
+    <a href="/messagethis/{{x.send}}">Reply</a></div>
+
+</div>
+{% endif %}
+</div>
+{% endfor %}
+
+</div>
+
+</div>
+{% endblock %}

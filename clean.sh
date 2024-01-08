@@ -1,0 +1,1 @@
+rm myapp/app.db
